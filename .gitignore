@@ -1,5 +1,6 @@
 # ── Python ──────────────────────────────────────────────────────────────────
 __pycache__/
+.pytest_cache/
 *.pyc
 *.pyo
 .venv/
@@ -28,6 +29,20 @@ powerbi_export/models/model_LR.joblib
 # The app reads only powerbi_export/advanced/*.csv and the embedded PNGs.
 # These raw/cleaned cohort dumps are large and unused at runtime.
 powerbi_export/core_data/
+
+# ── Internal docs (planning/handoff/notes) — keep private, not for public repo ─
+REPORT_NOTES.md
+REPORT_HANDOFF.md
+MASTER_REPORT_PACKAGE.md
+STREAMLIT_HANDOFF.md
+POWERBI_BUILD_GUIDE.md
+POWERBI_DASHBOARD_SPEC.md
+
+# ── Offline analysis pipeline — not needed by the deployed app ───────────────
+covid_analysis_full.py
+advanced_methods.py
+test_analysis.py
+requirements-analysis.txt
 
 # ── OS noise ────────────────────────────────────────────────────────────────
 .DS_Store
