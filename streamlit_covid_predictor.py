@@ -23,7 +23,7 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Roboto+Mono:wght@400;500&display=swap');
 
 html, body, [class*="css"] {
     /* DCU brand typeface Objektiv Mk2, with Inter then Arial (DCU fallback) */
@@ -842,6 +842,28 @@ html, body, [class*="css"],
    methodology steps) — they read as clip-art in an academic tool. */
 .fc-icon, .wu-icon, .mtl-ic { display: none !important; }
 .fc-title, .mtl-t { margin-top: 0 !important; }
+
+/* ── Typographic identity ────────────────────────────────────────────────────
+   Serif headlines (journal/thesis feel) over a clean sans body. This is the
+   single strongest cue that a human designed the page, not a template. */
+.hero h1, .sh h2, .tool-hdr h2, .tool-welcome h3,
+.fc-title, .wu-title, .mtl-t,
+h1, h2, h3,
+[data-testid="stExpander"] summary {
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif !important;
+    letter-spacing: -0.01em !important;
+    font-weight: 600 !important;
+}
+.hero h1 { font-weight: 700 !important; letter-spacing: -0.02em !important; line-height: 1.08 !important; }
+/* Body, labels, data and small caps stay sans for clarity */
+.card-title, .ml, .l, .fch, .hero-badge, .navlink,
+.sp-th, .mtl-num, .rb, .chip, .live-badge {
+    font-family: 'Inter', Arial, sans-serif !important;
+}
+/* Numeric displays use tabular figures so columns/scores don't jitter */
+.rn, .mv, .stc .n, .hero-stat .n, .fv {
+    font-variant-numeric: tabular-nums !important;
+}
 
 /* Neutral scrollbar */
 ::-webkit-scrollbar-track { background: #ECEFF3 !important; }
