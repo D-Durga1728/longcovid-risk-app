@@ -623,17 +623,10 @@ html { overflow-y: scroll !important; }
 @media (max-width:760px){ .mtl-arrow{ transform:rotate(90deg); } .mtl-step{ max-width:none; } }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-@keyframes pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4)} 50%{box-shadow:0 0 0 9px rgba(59,130,246,0)} }
-.pulse { animation: pulse 2.2s infinite; }
 
 /* ── Extra motion layer (native CSS, no JS libs) ─────────────────────────── */
 @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
 @keyframes slideInL { from{opacity:0;transform:translateX(-22px)} to{opacity:1;transform:translateX(0)} }
-@keyframes floatY   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
-@keyframes shimmer  { 0%{background-position:-180% 0} 100%{background-position:180% 0} }
-
-/* gentle floating glow inside the hero */
-.hero::before { animation: floatY 9s ease-in-out infinite; }
 
 /* staggered entrance for the hero stat cards */
 .hero-stats .hero-stat { animation: slideInL .55s ease both; }
@@ -752,8 +745,6 @@ html, body, [class*="css"],
    subtle card-hover lift (motion that conveys cause→effect). We DISABLE only the
    decorative loops that read as "demo": the pulsing badge and the floating glow.
    (Accessibility: the prefers-reduced-motion guard further up still wins.) */
-.pulse { animation: none !important; }
-.hero::before { animation: none !important; }
 
 /* Subtle, professional hover lift on interactive cards only */
 .card:hover, .fc:hover, .mtl-step:hover {
@@ -1310,15 +1301,6 @@ except Exception as _startup_err:
 # ─────────────────────────────────────────────────────────────────────────────
 for k, v in {"page":"landing","patient":None,"score":None}.items():
     if k not in st.session_state: st.session_state[k] = v
-
-def go_landing():
-    st.session_state.update({"page":"landing","patient":None,"score":None})
-    st.rerun()
-
-def go_tool():
-    st.session_state.page = "tool"
-    st.session_state["scroll_top"] = True   # open the tool page at the very top
-    st.rerun()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # NAV BAR  - everything in ONE row of st.columns
@@ -2132,20 +2114,6 @@ def page_tool():
     """, unsafe_allow_html=True)
     render_nav()
 
-    # When arriving from "Start Assessment", scroll to the very top of the page.
-    if st.session_state.pop("scroll_top", False):
-        import streamlit.components.v1 as _top_comp
-        _top_comp.html("""<script>
-(function(){
-  function _t(){ try{
-    var m = window.parent.document.querySelector('section[data-testid="stMain"]');
-    if(m) m.scrollTo({top:0, behavior:'auto'});
-    window.parent.scrollTo(0,0);
-  }catch(e){} }
-  _t(); setTimeout(_t,80); setTimeout(_t,250); setTimeout(_t,600);
-})();
-</script>""", height=0, scrolling=False)
-
     # ── Sample patients: auto-selected from real training data ─────────────────
     # find_sample_patients() scans the dataset and picks the real patients whose
     # calibrated risk is closest to 80 / 58 / 38 / 10 %, so each Load button lands
@@ -2575,7 +2543,7 @@ def page_tool():
                     </div>
                 </div>
                 <div style="margin-top:9px;">
-                    <span class="rb {rbc} pulse">{level} RISK</span>
+                    <span class="rb {rbc}">{level} RISK</span>
                 </div>
                 <div style="margin-top:11px;font-size:.8rem;color:#374151;font-weight:500;">{urge}</div>
                 <div style="margin-top:4px;font-size:.76rem;color:#6B7280;">Recovery: {rec}</div>
